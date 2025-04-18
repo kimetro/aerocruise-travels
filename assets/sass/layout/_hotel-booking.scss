@@ -1,0 +1,156 @@
+.hotel-booking-time {
+    display: flex;
+    padding: 20px 24px;
+    align-items: center;
+    gap: 32px;
+    border-radius: 10px;
+    background: rgba(77, 115, 252, 0.10);
+    border: 1px solid $light-black;
+
+    @include media-query(1099px) {
+        gap: 16px;
+    }
+
+    @include media-query(992px) {
+        display: grid;
+        gap: 0;
+    }
+
+    .input-date-picker,
+    .custom-sel-input-block {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        position: relative;
+
+        @include media-query(1199px) {
+            margin-bottom: 16px;
+        }
+
+        &.location-select {
+            width: 100%;
+
+            i {
+                position: absolute;
+                bottom: 0;
+                color: $accent-1;
+                font-size: 24px;
+            }
+        }
+
+        .sel-input {
+            width: 252px;
+            color: $lightest-black;
+            font-family: $font-primary;
+            font-size: 21px;
+            font-weight: 500;
+            line-height: 130%;
+            border: none;
+            background: transparent;
+            padding: 4px 0 0 0;
+            box-shadow: none;
+
+            @include media-query(1799px) {
+                width: 100%;
+            }
+
+            &::placeholder {
+                color: $light-black;
+            }
+
+            &:focus {
+                outline: 0;
+            }
+
+            &.location-input {
+                width: 100%;
+                padding: 0 0 0 32px;
+            }
+        }
+
+        .slector-wrapper {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 60px;
+            z-index: 888;
+            background: $lightest-gray;
+            padding-bottom: 16px;
+            overflow: auto;
+            box-shadow: $light-shadow;
+            border-radius: 8px;
+            height: 300px;
+
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: transparent;
+                padding: 0 2px;
+                width: 8px;
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                width: 8px;
+                background: $dark-gray;
+                border-radius: 6px;
+            }
+
+            @include widther(768px) {
+                max-width: 265px !important;
+                min-width: 265px !important;
+                width: auto;
+            }
+
+            li {
+                &.top-set {
+                    position: sticky;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                }
+
+                span {
+                    border-radius: 8px 8px 0 0;
+                    display: block;
+                    padding: 10px 16px;
+                    background: $white;
+
+                }
+
+                .sel-option {
+
+                    width: 100%;
+                    background: transparent;
+                    border: none;
+                    padding: 6px 10px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    color: $lightest-black;
+                    cursor: pointer;
+                    transition: $transition;
+
+                    &:hover {
+                        background: $dark-gray;
+                    }
+                }
+            }
+        }
+
+        i {
+            font-size: 21px;
+            color: $accent-1;
+        }
+    }
+}
+
+.detail-form{
+    textarea{
+        border: 1px solid $light-black;
+        border-radius: 10px;
+    }
+}

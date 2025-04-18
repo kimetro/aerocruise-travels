@@ -1,0 +1,27 @@
+.achievement{
+    .achievements-block{
+        padding: clamp(32px, 3.333vw, 96px);
+        @include media-query(576px){
+            padding: 24px 16px;
+        }
+    }
+    .counter-section {
+        .counter-count {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: clamp(12px, 0.83vw, 24px);
+            padding: clamp(16px, 1.66vw, 48px) clamp(20px, 2.2vw, 54px);
+            border-radius: 10px;
+            box-shadow: $light-shadow;
+            img{
+                width: clamp(32px, 2.5vw, 64px);
+                height: clamp(32px, 2.5vw, 64px);
+            }
+        }
+    }
+    .achievement-image{
+        height: 100%;
+        object-fit: cover;
+    }
+}

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="FlyNow HTML5 Template">
+
+    <title>Aerocruise Travels</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/media/favicon.png">
+
+    <!-- All CSS files -->
+    <link rel="stylesheet" href="assets/css/vendor/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/slick.css">
+    <link rel="stylesheet" href="assets/css/vendor/slick-theme.css">
+    <link rel="stylesheet" href="assets/css/vendor/datetime.css">
+    <link rel="stylesheet" href="assets/css/vendor/calendar/classic.css">
+    <link rel="stylesheet" href="assets/css/vendor/calendar/classic.date.css">
+    <link rel="stylesheet" href="assets/css/vendor/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/ui-autocomplete.css">
+    <link rel="stylesheet" href="assets/css/vendor/sal.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="">
+    <!-- Main Wrapper Start -->
+    <div id="main-wrapper" class="main-wrapper mr-4">
+
+<!-- Header Area Start -->
+<header>
+    <nav class="main-menu">
+      <div class="container-fluid">
+        <div class="main-menu__block d-flex align-items-center justify-content-between py-2">
+  
+          <!-- Logo + Search Bar -->
+          <div class="d-flex align-items-center flex-grow-1">
+            <!-- Logo -->
+            <div class="main-menu__logo me-3">
+              <a href="index.html">
+                <img src="assets/media/logo-aero-small.png" alt="Aerocruise" style="height: 60px;">
+              </a>
+            </div>
+  
+            <!-- Search Bar -->
+            <form class="flex-grow-1">
+              <input 
+                type="text" 
+                class="form-control" 
+                placeholder="Search tour-packages..." 
+                style="background-color: skyblue; border: none; height: 45px; padding: 10px 15px;">
+            </form>
+          </div>
+  
+          <!-- Nav and Login -->
+          <div class="main-menu__right d-flex align-items-center">
+            <div class="main-menu-signup__login d-xl-flex d-none me-3">
+              <a href="login.html" class="main-menu__login">Login</a>
+              <span class="mx-1">/</span>
+              <a href="sign-up.html" class="main-menu__login">Signup</a>
+            </div>
+            <a href="#" class="main-menu__toggler mobile-nav__toggler">
+              <i class="fa fa-bars"></i>
+            </a>
+          </div>
+  
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- Header Area End -->
+
+<!-- Hero Banner start -->
+<section class="hero-banner-1 py-5">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        
+        <!-- Left Content -->
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 mb-5 mb-lg-0">
+          <div class="content-block pe-lg-5">
+            <h1 class="lightest-black mb-3">
+              <span class="color-primary">Book</span> Your Dream 
+              <span class="color-primary">Flights</span> Now!
+            </h1>
+            <p class="dark-gray mb-4">With Aerocruise, you will get the best deals on flights and hotels.</p>
+  
+            <!-- Booking Form Card -->
+            <div class="card shadow-lg border-0 rounded-3">
+              <div class="card-header bg-primary text-white text-center py-3 rounded-top-3">
+                <h4 class="mb-0">✈️ Search Flights</h4>
+              </div>
+              <div class="card-body p-4">
+                <!-- Tabs -->
+                <ul class="nav nav-tabs justify-content-center mb-4" id="flightTabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="round-tab" data-bs-toggle="tab" data-bs-target="#round" type="button" role="tab">Round Trip</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="oneway-tab" data-bs-toggle="tab" data-bs-target="#oneway" type="button" role="tab">One Way</button>
+                  </li>
+                </ul>
+  
+                <!-- Tab Content -->
+                <div class="tab-content" id="flightTabsContent">
+                  <!-- Round Trip -->
+                  <div class="tab-pane fade show active" id="round" role="tabpanel">
+                    <form class="row g-3">
+                      <div class="col-md-6">
+                        <label class="form-label">From</label>
+                        <select class="form-select" required>
+                          <option value="" disabled selected>Select Origin</option>
+                          <option value="JFK">New York (JFK)</option>
+                          <option value="LAX">Los Angeles (LAX)</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">To</label>
+                        <select class="form-select" required>
+                          <option value="" disabled selected>Select Destination</option>
+                          <option value="LHR">London (LHR)</option>
+                          <option value="DXB">Dubai (DXB)</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Departure Date</label>
+                        <input type="date" class="form-control" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Return Date</label>
+                        <input type="date" class="form-control" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Adults</label>
+                        <select class="form-select" required>
+                          <option value="0" disabled selected>0</option>
+                          <script>for (let i = 1; i <= 9; i++) document.write(`<option value="${i}">${i}</option>`);</script>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Children</label>
+                        <select class="form-select">
+                          <option value="0" selected>0</option>
+                          <script>for (let i = 1; i <= 6; i++) document.write(`<option value="${i}">${i}</option>`);</script>
+                        </select>
+                      </div>
+                      <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary px-4">Search Round Trip</button>
+                      </div>
+                    </form>
+                  </div>
+  
+                  <!-- One Way -->
+                  <div class="tab-pane fade" id="oneway" role="tabpanel">
+                    <form class="row g-3">
+                      <div class="col-md-6">
+                        <label class="form-label">From</label>
+                        <select class="form-select" required>
+                          <option value="" disabled selected>Select Origin</option>
+                          <option value="SFO">San Francisco (SFO)</option>
+                          <option value="SEA">Seattle (SEA)</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">To</label>
+                        <select class="form-select" required>
+                          <option value="" disabled selected>Select Destination</option>
+                          <option value="AMS">Amsterdam (AMS)</option>
+                          <option value="HND">Tokyo (HND)</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Departure Date</label>
+                        <input type="date" class="form-control" required>
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Adults</label>
+                        <select class="form-select" required>
+                          <option value="0" disabled selected>0</option>
+                          <script>for (let i = 1; i <= 9; i++) document.write(`<option value="${i}">${i}</option>`);</script>
+                        </select>
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Children</label>
+                        <select class="form-select">
+                          <option value="0" selected>0</option>
+                          <script>for (let i = 1; i <= 6; i++) document.write(`<option value="${i}">${i}</option>`);</script>
+                        </select>
+                      </div>
+                      <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary px-4">Search One Way</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- end card -->
+          </div>
+        </div>
+  
+        <!-- Right Side Image -->
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 text-center">
+            <div class="image" data-tilt data-tilt-max="3" data-tilt-speed="700" data-tilt-scale="1.02">
+                <img src="./assets/media/banner/plane.png" alt="Flying Plane" class="img-fluid">
+              </div>              
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Hero Banner End -->  
+
+        <!-- Footer Start -->
+        <footer class="bg-white p-40"  data-sal="slide-down" data-sal-duration="800" data-sal-delay="100" data-sal-easing="ease-in-out">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-32 ">
+                        <a href=""><img src="assets/media/logo-aero-small.png" alt="" class="mb-16"></a>
+                        <p class="dark-gray mb-16">Lorem ipsum dolor sit amet consectetur. Aliquet vulputate augue
+                            penatibus in
+                            libero et id aliquam. In ridiculus pretium est velit euismod. </p>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-6 col-6 mb-lg-0 mb-32">
+                        <h4 class="light-black mb-24">Booking</h4>
+                        <div class="our-links">
+                            <ul class="unstyled">
+                                <li class="mb-16"><a href="flight-booking.html" class="light-black">Book Flights</a>
+                                </li>
+                                <li class="mb-16"><a href="tour-packages.html" class="light-black">Travel Services</a>
+                                </li>
+                                <li class="mb-16"><a href="car-booking.html" class="light-black">Transportation</a></li>
+                                <li class="mb-16"><a href="tour-packages.html" class="light-black">Planning Your
+                                        Trip</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-6 col-6 mb-lg-0 mb-32">
+                        <h4 class="light-black mb-24">Useful Links</h4>
+                        <div class="our-links">
+                            <ul class="unstyled">
+                                <li class="mb-16"><a href="index.html" class="light-black">Home</a>
+                                </li>
+                                <li class="mb-16"><a href="blog-listing.html" class="light-black">Blogs</a>
+                                </li>
+                                <li class="mb-16"><a href="about-us.html" class="light-black">About </a></li>
+                                <li class="mb-16"><a href="contact.html" class="light-black">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-6 col-6 mb-md-0 mb-32">
+                        <h4 class="light-black mb-24">Manage</h4>
+                        <div class="our-links">
+                            <ul class="unstyled">
+                                <li class="mb-16"><a href="flight-booking.html" class="light-black">Check-in</a></li>
+                                <li class="mb-16"><a href="tour-packages.html" class="light-black">Manage Your
+                                        Booking</a></li>
+                                <li class="mb-16"><a href="car-listing.html" class="light-black">Chaurfeur Drive</a>
+                                </li>
+                                <li class="mb-16"><a href="flight-listing.html" class="light-black">Flight Status</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                        <h4 class="light-black mb-16">Contact Us</h4>
+                        <div class="follow-us">
+                            <ul class="unstyled">
+                                <li class="mb-8"><img src="assets/media/icons/location-bk.png" alt="">7 Bell Yard, London England
+                                    WC2A 2JR.</li>
+                                <li class="mb-8 h4 color-primary"><img src="assets/media/icons/telephone.png"
+                                        alt="">&nbsp;&nbsp;+44 740 443 7676</li>
+                                <li class="mb-24"><a href=""><img src="assets/media/icons/mail.png"
+                                            alt="">&nbsp;&nbsp;info@aerocruise-travels.com</a></li>
+                            </ul>
+                        </div>
+                        <div class="social-link mb-32">
+                            <h6 class="light-black mb-8">Follow Us!</h6>
+                            <ul class="unstyled">
+                                <li><a href="" class="active"><img src="assets/media/icons/instagram.png" alt=""></a></li>
+                                <li><a href=""><img src="assets/media/icons/facebook.png" alt=""></a></li>
+                                <li><a href=""><img src="assets/media/icons/linkedin.png" alt=""></a></li>
+                                <li><a href=""><img src="assets/media/icons/twitter.png" alt=""></a></li>
+                            </ul>
+                        </div>
+                        <p class="light-black">©2025 Aerocruise Travels All Rights Reserved.</p>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer Area End  -->
+
+        <!-- modal-popup area Start  -->
+        <div class="search-popup">
+            <div class="search-popup__overlay search-toggler"></div>
+            <div class="search-popup__content">
+                <form role="search" method="get" class="search-popup__form" action="index.html">
+                    <input type="text" id="search" placeholder="Search Here...">
+                    <button type="submit"><i class="fal fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <!-- search-popup end-->
+    </div>
+
+
+
+    <!-- Jquery Js -->
+    <script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
+    <script src="assets/js/vendor/calendar/popper.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <script src="assets/js/vendor/slick.min.js"></script>
+    <script src="assets/js/vendor/jquery-appear.js"></script>
+    <script src="assets/js/vendor/jquery-validator.js"></script>
+    <script src="assets/js/vendor/aksVideoPlayer.js"></script>
+    <script src="assets/js/vendor/tilt.jquery.js"></script>
+    <script src="assets/js/vendor/calendar/picker.js"></script>
+    <script src="assets/js/vendor/calendar/picker.date.js"></script>
+    <script src="assets/js/vendor/autoComplete.js"></script>
+    <script src="assets/js/vendor/jquery.timepicker.min.js"></script>
+    <script src="assets/js/vendor/sal.js"></script>
+
+    <!-- Site Scripts -->
+    <script src="assets/js/date.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+
+</body>
+
+</html>

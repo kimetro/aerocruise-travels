@@ -1,0 +1,43 @@
+.blog-detail{
+    .blog_info_bar{
+        display: inline-flex;
+        gap: clamp(20px, 1.33vw, 48px);
+        flex-wrap: wrap;
+       
+        .author{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            img{
+                border-radius: 50%;
+            }
+        }
+    }
+    .result-tags{
+        display: flex;
+        gap: clamp(20px, 1.33vw, 48px);
+    }
+    .tag-words{
+        display: flex;
+        gap: 16px;
+    }
+    .article_detail-img{
+        height: 100%;
+        object-fit: cover;
+    }
+    .architex-tilt{
+        height: 100%;
+        object-fit: cover;
+        img{
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .qoute_img{
+        margin-top: 108px;
+        @include media-query(992px){
+            margin-top: 24px;
+            text-align: right;
+        }
+    }
+}

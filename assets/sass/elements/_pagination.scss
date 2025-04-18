@@ -1,0 +1,45 @@
+.pagination{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  li{
+    a{
+      width: 45px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white;
+      font-size: 16px;
+      font-family: $font-sec-2;      
+      font-weight: 600;
+      line-height: 150%; /* 24px */
+      border-radius: 8px;
+      letter-spacing: 0.32px;
+      background: $black;
+      @include media-query(490px) {
+        width: 38px;
+        height: 37px;
+        border-radius: 6px;
+      }
+
+      
+      i{
+        font-size: 16px;
+        font-weight: 400;
+        
+      }
+      &.active{
+        background: $accent-1;
+        color: $black;
+      }
+      &:hover{
+        color: $black;
+        background: $accent-1;
+      }
+
+    }
+  }
+}

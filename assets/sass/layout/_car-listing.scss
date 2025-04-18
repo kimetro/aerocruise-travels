@@ -1,0 +1,24 @@
+.brand-logo{
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: 5px;
+    border: 1px solid $light-black;
+    background: rgba(77, 115, 252, 0.10);
+    padding: 4px;
+    img{
+        width: clamp(64px, 6.458vw, 200px);
+    }
+    .rating{
+        padding: 8px clamp(12px, 1.25vw, 36px);
+        border-radius: 5px;
+        background: $accent-1;
+    }
+}
+.pricing-area{
+    .pre-reg{
+        padding: 8px 16px;
+        border-radius: 5px;
+        background: rgba(77, 115, 252, 0.10);
+    }
+}

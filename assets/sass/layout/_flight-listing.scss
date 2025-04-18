@@ -1,0 +1,104 @@
+.flight-listing-page{
+    .flight-block{
+        .flight-area{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            @include media-query(1199px){
+                display: grid;
+                justify-content: center;
+                gap: 32px;
+            }
+            .airline-name{
+                display: flex;
+                gap: 16px;
+                align-items: center;
+                img{
+                    border-radius: 50%;
+                }
+                @include media-query(1499px){
+                    display: block;
+                }
+                @include media-query(1199px){
+                    text-align: center;
+                }
+            }
+            .flight-detail{
+                display: flex;
+                align-items: center;
+                gap: 32px;
+                @include media-query(1699px){
+                    gap: 8px;
+                }
+                @include media-query(1199px){
+                   gap: 32px;
+                }
+            }
+            .flight-button{
+                display: flex;
+                align-items: center;
+                gap: 32px;
+                @include media-query(1599px){
+                    gap: 8px;
+                    display: block;
+                }
+                .amount{
+                    @include media-query(1599px){
+                        display: flex;
+                        flex-direction: row-reverse;
+                        justify-content: center;
+                        gap: 8px;
+                    }
+                    @include media-query(1199px){
+                        margin-bottom: 8px;
+                    }
+                }
+                @include media-query(1199px){
+                    margin: 0 auto;
+                 }
+            }
+        }
+    }
+    .accordion-button{
+        &:is(:not(.collapsed)){
+            i{
+                &.fa-chevron-down{
+                    &:before{
+                        content: "\f077"  !important;
+                    }
+                }
+            }
+        }
+    }
+}
+.time-detail{
+    @include media-query(992px){
+        padding-top: 40px;
+     }
+    @include media-query(767px){
+        padding-top: 10px;
+        text-align: center;
+     }
+    .flight-date{
+        padding: 12px;
+        background: $accent-2;
+        border-radius: 5px;
+        display: inline-flex;
+        color: $white;
+    }
+}
+.detail-block{
+    background: rgba(77, 115, 252, 0.10);
+    padding: 64px 24px;
+    border-radius: 10px;
+    img{
+        border-radius: 50%;
+    }
+    @include media-query(767px){
+        padding: 32px 24px;
+     }
+    @include media-query(576px){
+        text-align: center;
+     }
+
+}
