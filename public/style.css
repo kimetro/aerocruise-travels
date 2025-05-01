@@ -1,0 +1,53 @@
+
+/* Spinner is hidden by default */
+#search-results-loader {
+  display: none !important;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  margin-top: 1rem;
+}
+
+/* Spinner when loading is active */
+#search-results-loader.active {
+  display: flex !important;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Optional styling for spinner size */
+/* Spinner sizing only */
+#search-results-loader .spinner-border {
+  width: 2rem;
+  height: 2rem;
+}
+.card-footer {
+  font-size: 0.9rem;
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+img[alt][src*="airlines_"] {
+  max-height: 24px;
+  object-fit: contain;
+}
+
+html, body {
+  background: linear-gradient(135deg, #4895d8, #dff1ff) !important;
+  background-image: none !important;
+  min-height: 100vh !important;
+}
+
+.flight-card {
+  background-color: rgba(230, 245, 255, 0.9); /* Light blue with soft transparency */
+  border: 1px solid #b4d4ef;
+  border-radius: 0.5rem;
+}
+
+.carousel-inner img {
+  object-fit: cover;
+  height: 300px;
+}
+
