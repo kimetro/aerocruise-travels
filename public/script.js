@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   flatpickr("#departure-date-input", { dateFormat: "Y-m-d", minDate: "today" });
   flatpickr("#return-date-input", { dateFormat: "Y-m-d", minDate: "today" });
 
-  // Enhanced autocomplete with name + country
+  // Autocomplete
   const fetchAutocompleteSuggestions = async (input, datalist) => {
     const keyword = input.value.trim();
     if (keyword.length < 3) {
@@ -48,9 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Autocomplete error:', error);
     }
   };
+
   originInput.addEventListener('input', () => fetchAutocompleteSuggestions(originInput, originOptions));
   destinationInput.addEventListener('input', () => fetchAutocompleteSuggestions(destinationInput, destinationOptions));
 
+  // Search flights
   searchButton.addEventListener('click', async () => {
     searchResults.innerHTML = '';
     searchResultsSeparator.style.display = 'none';
@@ -94,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const carrierCode = flight.validatingAirlineCodes?.[0] || 'XX';
           const airlineLogo = `https://content.airhex.com/content/logos/airlines_${carrierCode}_50_50_s.png`;
+
           let html = `
             <div class="card mb-3 shadow-sm flight-card">
               <div class="card-body">
@@ -119,13 +122,19 @@ document.addEventListener('DOMContentLoaded', () => {
           html += `
               <div class="d-flex justify-content-between align-items-center mt-3">
                 <strong class="text-success">${flight.price.total} ${flight.price.currency}</strong>
-                <button class="btn btn-outline-primary btn-sm">Book Now</button>
+                <button class="btn btn-outline-primary btn-sm book-button">Book Now</button>
               </div>
-            </div></div>
-          `;
+            </div>
+          </div>`;
 
           listItem.innerHTML = html;
           searchResults.appendChild(listItem);
+
+          // Save flight + redirect on Book click
+          listItem.querySelector(".book-button").addEventListener("click", () => {
+            localStorage.setItem("selectedFlight", JSON.stringify(flight));
+            window.location.href = "/flight-booking.html";
+          });
         });
       } else {
         searchResults.innerHTML = '<div class="col-12"><div class="alert alert-warning">No flights found.</div></div>';

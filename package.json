@@ -10,6 +10,7 @@
     "amadeus": "^5.7.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nodemailer": "^6.10.1"
   }
 }
