@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aerocruise Travels</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <style>
+    #search-results-loader {
+      display: none;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <header class="bg-white border-bottom shadow-sm sticky-top">
+    <nav class="navbar navbar-expand-md navbar-light container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="/media/logo-aero-small.png" alt="Aerocruise Logo" height="40" class="me-2">
+        <span class="fw-bold text-primary">Aerocruise Travels</span>
+      </a>
+  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Flights</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Packages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+        <div class="d-none d-md-block ms-3">
+          <span class="text-muted small">📞 +44 740 443 7676</span>
+        </div>
+      </div>
+    </nav>
+  </header>  
+  
+  <div class="container my-4">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h1 class="mb-3">
+          <span class="text-primary">Book</span> Your Dream <span class="text-primary">Flights</span> Now!
+        </h1>
+        <p class="mb-4">With Aerocruise, you get the best deals on flights and hotels.</p>
+
+        <!-- Flight Search Form -->
+        <form id="flight-search-form" class="p-4 rounded shadow" style="background-color: rgba(230, 245, 255, 0.9); border: 1px solid #b4d4ef;">
+          <div class="row g-2 mb-2">
+            <div class="col">
+              <label class="form-label">From</label>
+              <input type="text" id="origin-input" class="form-control" placeholder="Origin" list="origin-options">
+              <datalist id="origin-options"></datalist>
+            </div>
+            <div class="col">
+              <label class="form-label">To</label>
+              <input type="text" id="destination-input" class="form-control" placeholder="Destination" list="destination-options">
+              <datalist id="destination-options"></datalist>
+            </div>
+          </div>
+          <div class="row g-2 mb-2">
+            <div class="col">
+              <label class="form-label">Departure</label>
+              <input type="text" id="departure-date-input" class="form-control" placeholder="yyyy-mm-dd">
+            </div>
+            <div class="col">
+              <label class="form-label">Return</label>
+              <input type="text" id="return-date-input" class="form-control" placeholder="yyyy-mm-dd">
+            </div>
+          </div>
+          <div class="row g-2 mb-2 align-items-end">
+            <div class="col">
+              <label class="form-label" for="adults-input">Adults</label>
+              <input type="number" id="adults-input" class="form-control" value="1" min="1" max="9">
+            </div>
+            <div class="col">
+              <label class="form-label" for="children-input">Children</label>
+              <input type="number" id="children-input" class="form-control" value="0" min="0" max="9">
+            </div>
+            <div class="col">
+              <label class="form-label" for="infants-input">Infants</label>
+              <input type="number" id="infants-input" class="form-control" value="0" min="0" max="9">
+            </div>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col">
+              <label class="form-label">Class</label>
+              <select id="travel-class-select" class="form-select">
+                <option value="ECONOMY">Economy</option>
+                <option value="BUSINESS">Business</option>
+                <option value="FIRST">First</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label">Trip</label>
+              <select id="flight-type-select" class="form-select">
+                <option value="one-way">One-way</option>
+                <option value="round-trip">Round-trip</option>
+              </select>
+            </div>
+          </div>
+          <button type="button" id="search-button" class="btn btn-primary w-100 mt-2">Search Flights</button>
+        </form>
+      </div>
+
+      <!-- Plane Image -->
+<!-- Plane Slideshow -->
+<div class="col-md-6 text-center">
+  <div id="planeCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="/media/plane.png" class="d-block w-100" alt="Plane 1">
+      </div>
+      <div class="carousel-item">
+        <img src="/media/plane2.png" class="d-block w-100" alt="Plane 2">
+      </div>
+      <div class="carousel-item">
+        <img src="/media/airport-img2.avif" class="d-block w-100" alt="Logo Slide">
+      </div>
+      <div class="carousel-item">
+        <img src="/media/a-img5.jpg" class="d-block w-100" alt="Logo Slide">
+      </div>
+      <div class="carousel-item">
+        <img src="/media/airport-img3.avif" class="d-block w-100" alt="Logo Slide">
+      </div>
+      <div class="carousel-item">
+        <img src="/media/airport-img4.avif" class="d-block w-100" alt="Logo Slide">
+      </div>
+      <div class="carousel-item">
+        <img src="/media/airport-1.avif" class="d-block w-100" alt="Logo Slide">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#planeCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#planeCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+</div>
+
+    <!-- Loader & Results -->
+    <div id="search-results-loader">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div id="search-results-separator" class="border-bottom mb-3" style="display: none;"></div>
+    <div id="search-results" class="row g-3"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-5 border-top mt-5" style="background-color: rgba(225, 240, 255, 0.85); border-top: 1px solid #a8cfe9;">
+    <div class="container">
+      <div class="row gy-4 align-items-start">
+        <div class="col-md-4">
+          <img src="/media/logo-aero-small.png" alt="Aerocruise Logo" height="50" class="mb-3">
+          <p class="text-muted small">
+            Aerocruise Travels helps you find the best deals on flights, travel packages, and transportation services. Start your journey with us today.
+          </p>
+        </div>
+        <div class="col-md-4">
+          <h6 class="fw-bold mb-3">Contact Us</h6>
+          <ul class="list-unstyled text-muted small">
+            <li class="mb-2">📍 7 Bell Yard, London, England WC2A 2JR</li>
+            <li class="mb-2">☎️ <a href="tel:+447404437676" class="text-decoration-none text-muted">+44 740 443 7676</a></li>
+            <li>📧 <a href="mailto:info@aerocruise-travels.com" class="text-decoration-none text-muted">info@aerocruise-travels.com</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h6 class="fw-bold mb-3">Follow Us</h6>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-muted fs-5"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-muted fs-5"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-muted fs-5"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="text-muted fs-5"><i class="bi bi-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-muted small mt-4 pt-3 border-top">
+        &copy; 2025 Aerocruise Travels. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    flatpickr("#departure-date-input", { dateFormat: "Y-m-d", minDate: "today" });
+    flatpickr("#return-date-input", { dateFormat: "Y-m-d", minDate: "today" });
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>
