@@ -1,8 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const searchButton = document.getElementById('search-button');
-  const searchResults = document.getElementById('search-results');
-  const searchResultsLoader = document.getElementById('search-results-loader');
-  const searchResultsSeparator = document.getElementById('search-results-separator');
   const originInput = document.getElementById('origin-input');
   const destinationInput = document.getElementById('destination-input');
   const originOptions = document.getElementById('origin-options');
@@ -11,23 +8,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const returnDateInput = document.getElementById('return-date-input');
   const returnDateContainer = returnDateInput.closest('.col');
 
-  // Toggle return date visibility
+  // Toggle return date field
   function toggleReturnDate() {
-    if (flightTypeSelect.value === 'round-trip') {
-      returnDateContainer.style.display = 'block';
-    } else {
-      returnDateContainer.style.display = 'none';
-    }
+    returnDateContainer.style.display = flightTypeSelect.value === 'round-trip' ? 'block' : 'none';
   }
   toggleReturnDate();
   flightTypeSelect.addEventListener('change', toggleReturnDate);
 
-  // Initialize flatpickr
+  // Date pickers
   flatpickr("#departure-date-input", { dateFormat: "Y-m-d", minDate: "today" });
   flatpickr("#return-date-input", { dateFormat: "Y-m-d", minDate: "today" });
 
+  // Detect user currency via IP geolocation
+  let userCurrency = "USD"; // fallback
+  try {
+    const res = await fetch("https://ipapi.co/json/");
+    const geo = await res.json();
+    if (geo && geo.currency) userCurrency = geo.currency;
+    localStorage.setItem("userCurrency", userCurrency);
+  } catch (err) {
+    console.warn("Could not determine user currency:", err.message);
+  }
+
+  // Debounce helper
+  function debounce(func, delay = 300) {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), delay);
+    };
+  }
+
   // Autocomplete
-  const fetchAutocompleteSuggestions = async (input, datalist) => {
+  async function fetchAutocompleteSuggestions(input, datalist) {
     const keyword = input.value.trim();
     if (keyword.length < 3) {
       datalist.innerHTML = '';
@@ -35,116 +48,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     try {
       const response = await fetch(`/api/autocomplete?keyword=${encodeURIComponent(keyword)}`);
-      if (!response.ok) throw new Error('Network error');
+      if (!response.ok) throw new Error('Autocomplete API failed');
       const data = await response.json();
       datalist.innerHTML = '';
       data.forEach(location => {
+        const name = location.name;
+        const code = location.iataCode;
+        const country = location.address?.countryName || '';
+        const city = location.address?.cityName || name;
+        const label = `${name} (${code}) – ${city}, ${country}`;
         const option = document.createElement('option');
-        option.value = location.iataCode;
-        option.textContent = `${location.name}, ${location.countryName} (${location.iataCode})`;
+        option.value = code;
+        option.textContent = label;
         datalist.appendChild(option);
       });
-    } catch (error) {
-      console.error('Autocomplete error:', error);
+    } catch (err) {
+      console.error("❌ Autocomplete error:", err.message || err);
     }
-  };
+  }
 
-  originInput.addEventListener('input', () => fetchAutocompleteSuggestions(originInput, originOptions));
-  destinationInput.addEventListener('input', () => fetchAutocompleteSuggestions(destinationInput, destinationOptions));
+  originInput.addEventListener('input', debounce(() => fetchAutocompleteSuggestions(originInput, originOptions)));
+  destinationInput.addEventListener('input', debounce(() => fetchAutocompleteSuggestions(destinationInput, destinationOptions)));
 
-  // Search flights
-  searchButton.addEventListener('click', async () => {
-    searchResults.innerHTML = '';
-    searchResultsSeparator.style.display = 'none';
-    searchResultsLoader.style.display = 'flex';
+  // Handle Search
+  searchButton.addEventListener("click", () => {
+    const searchParams = {
+      origin: originInput.value.trim(),
+      destination: destinationInput.value.trim(),
+      departureDate: document.getElementById("departure-date-input").value,
+      returnDate: document.getElementById("return-date-input").value,
+      travelClass: document.getElementById("travel-class-select").value,
+      adults: document.getElementById("adults-input").value,
+      children: document.getElementById("children-input").value,
+      infants: document.getElementById("infants-input").value,
+      flightType: flightTypeSelect.value,
+      currency: userCurrency
+    };
 
-    const origin = originInput.value;
-    const destination = destinationInput.value;
-    const departureDate = document.getElementById('departure-date-input').value;
-    const returnDate = document.getElementById('return-date-input').value;
-    const travelClass = document.getElementById('travel-class-select').value;
-    const adults = parseInt(document.getElementById('adults-input').value) || 1;
-    const children = parseInt(document.getElementById('children-input').value) || 0;
-    const infants = parseInt(document.getElementById('infants-input').value) || 0;
-    const flightType = flightTypeSelect.value;
-
-    if (!origin || !destination || !departureDate || (flightType === 'round-trip' && !returnDate)) {
-      alert('Please fill all required fields');
-      searchResultsLoader.style.display = 'none';
+    if (!searchParams.origin || !searchParams.destination || !searchParams.departureDate ||
+        (searchParams.flightType === 'round-trip' && !searchParams.returnDate)) {
+      alert("Please fill in all required fields.");
       return;
     }
 
-    const queryParams = new URLSearchParams({
-      originLocationCode: origin,
-      destinationLocationCode: destination,
-      departureDate,
-      travelClass,
-      adults,
-      children,
-      infants,
-      ...(flightType === 'round-trip' ? { returnDate } : {})
-    }).toString();
-
-    try {
-      const response = await fetch(`/api/search?${queryParams}`);
-      const data = await response.json();
-
-      if (data.data && data.data.length > 0) {
-        data.data.forEach(flight => {
-          const listItem = document.createElement('div');
-          listItem.className = 'col-12';
-
-          const carrierCode = flight.validatingAirlineCodes?.[0] || 'XX';
-          const airlineLogo = `https://content.airhex.com/content/logos/airlines_${carrierCode}_50_50_s.png`;
-
-          let html = `
-            <div class="card mb-3 shadow-sm flight-card">
-              <div class="card-body">
-                <div class="d-flex align-items-center mb-2">
-                  <img src="${airlineLogo}" alt="${carrierCode}" class="me-2" height="40">
-                  <h6 class="mb-0">${carrierCode} — ${flight.travelerPricings.length} Passenger(s)</h6>
-                </div>
-          `;
-
-          flight.itineraries.forEach(itinerary => {
-            itinerary.segments.forEach((segment, idx) => {
-              html += `
-                <div class="mb-2">
-                  <strong>${segment.departure.iataCode}</strong> → <strong>${segment.arrival.iataCode}</strong><br>
-                  Departure: ${new Date(segment.departure.at).toLocaleString()}<br>
-                  Arrival: ${new Date(segment.arrival.at).toLocaleString()}
-                </div>
-              `;
-              if (idx < itinerary.segments.length - 1) html += '<hr>';
-            });
-          });
-
-          html += `
-              <div class="d-flex justify-content-between align-items-center mt-3">
-                <strong class="text-success">${flight.price.total} ${flight.price.currency}</strong>
-                <button class="btn btn-outline-primary btn-sm book-button">Book Now</button>
-              </div>
-            </div>
-          </div>`;
-
-          listItem.innerHTML = html;
-          searchResults.appendChild(listItem);
-
-          // Save flight + redirect on Book click
-          listItem.querySelector(".book-button").addEventListener("click", () => {
-            localStorage.setItem("selectedFlight", JSON.stringify(flight));
-            window.location.href = "/flight-booking.html";
-          });
-        });
-      } else {
-        searchResults.innerHTML = '<div class="col-12"><div class="alert alert-warning">No flights found.</div></div>';
-      }
-    } catch (error) {
-      console.error('Search error:', error);
-      searchResults.innerHTML = '<div class="col-12"><div class="alert alert-danger">Failed to fetch flight data. Try again later.</div></div>';
-    } finally {
-      searchResultsLoader.style.display = 'none';
-      searchResultsSeparator.style.display = 'block';
-    }
+    localStorage.setItem("searchParams", JSON.stringify(searchParams));
+    window.location.href = "/flight-results.html";
   });
 });

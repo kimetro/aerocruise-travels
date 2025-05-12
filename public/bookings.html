@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All Bookings – Aerocruise</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <script>
+    fetch("/api/bookings")
+      .then(res => {
+        if (res.status === 401) {
+          window.location.href = "/admin-login.html";
+        }
+      });
+  </script>  
+</head>
+<body>
+  <div class="container py-4">
+    <h2 class="mb-4 text-primary">📋 All Bookings</h2>
+    <div class="table-responsive">
+        <div class="d-flex justify-content-end mb-3">
+            <button id="logout-btn" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+          </div>          
+      <table class="table table-striped table-bordered align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>PNR</th>
+            <th>Passenger</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>From → To</th>
+            <th>Departure</th>
+            <th>Return</th>
+            <th>Price</th>
+            <th>Booked On</th>
+          </tr>
+        </thead>
+        <tbody id="bookings-body">
+          <tr><td colspan="9" class="text-center text-muted">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Pagination Controls -->
+    <div id="pagination-controls" class="d-flex justify-content-center mt-3"></div>
+    <a href="/" class="btn btn-secondary mt-3"><i class="bi bi-house"></i> Back to Home</a>
+  </div>
+
+  <script src="bookings.js"></script>
+  <script>
+    document.getElementById("logout-btn").addEventListener("click", async () => {
+      await fetch("/api/admin/logout");
+      window.location.href = "/admin-login.html";
+    });
+  </script>
+  
+</body>
+</html>
